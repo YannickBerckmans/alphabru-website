@@ -12,7 +12,6 @@ var fr = {
 	"contact-us.tva-title":"TVA",
 	"contact-us.tva":"BE 0893 555 882",
 	"contact-us.more-info-title":"Plus d'informations",
-	"contact-us.more-info":"Nous trouvons pour vous n'importe quel livre dans le monde.",
 	"about-us.title":"A propos de nous",
 	"about-us.content-1":"Depuis 1833, nous fournissons tous types de publications, quel que soit le pays d’origine ou la source (éditeur professionnel ou non-professionnel) à des sociétés et institutions.",
 	"about-us.content-2":"Nous nous chargeons de vous fournir en version papier ou en version PDF les publications suivantes:  livres, actes de congrès, thèses, cours, normes, standards,  documents officiels,  études,  livres épuisés, etc...  quelque soit la langue ou le pays d'origine.",
