@@ -41,4 +41,14 @@ composer test
 
 That's it! Now go build something cool.
 
+
+Install Slim
+```
+composer create-project slim/slim-skeleton "Alphabru"
+```
+
+To start the local webserver
+
+```
 Run php -S localhost:8099
+```
