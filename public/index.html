@@ -110,7 +110,7 @@
 
             
 
-            <form action="#" class="p-5 bg-white">
+            <form id="form-email" method="post" class="p-5 bg-white">
              
               <p class="translatable text-primary" key="warning-2">
                   PAS DE VENTE AUX PARTICULIERS !
@@ -119,12 +119,12 @@
                 <div class="col-md-6 mb-3 mb-md-0">
                   <label class="text-black translatable" for="company" key="form.company">Société</label>
                   <div class="text-primary" style="display:inline-block">*</div> 
-                  <input type="text" id="company" class="form-control">
+                  <input type="text" id="company" class="form-control input-content-reload" name="company" required>
                 </div>
                 <div class="col-md-6">
                   <label class="text-black translatable" for="last-name" key="form.last-name">Nom de famille</label>
                   <div class="text-primary" style="display:inline-block">*</div> 
-                  <input type="text" id="last-name" class="form-control">
+                  <input type="text" id="last-name" class="form-control input-content-reload" name="last-name" required>
                 </div>
               </div>
 
@@ -133,7 +133,7 @@
                 <div class="col-md-12">
                   <label class="text-black translatable" for="email" key="form.email">Email</label>
                   <div class="text-primary" style="display:inline-block">*</div> 
-                  <input type="email" id="email" class="form-control">
+                  <input type="email" id="email" class="form-control input-content-reload" name="email" required>
                 </div>
               </div>
 
@@ -142,7 +142,7 @@
                 <div class="col-md-12">
                   <label class="text-black translatable" for="phone" key="form.phone">Téléphone</label> 
                   <div class="text-primary" style="display:inline-block">*</div> 
-                  <input type="phone" id="phone" class="form-control">
+                  <input type="text" id="phone" class="form-control input-content-reload" name="phone" required>
                 </div>
               </div>
 
@@ -151,7 +151,7 @@
                 <div class="col-md-12">
                   <label class="text-black translatable" for="subject" key="form.subject">Sujet</label>
                   <div class="text-primary" style="display:inline-block">*</div>  
-                  <input type="subject" id="subject" class="form-control">
+                  <input type="text" id="subject" class="form-control input-content-reload" name="subject" required>
                 </div>
               </div>
 
@@ -159,13 +159,13 @@
                 <div class="col-md-12">
                   <label class="text-black translatable" for="message" key="form.message">Message</label> 
                   <div class="text-primary" style="display:inline-block">*</div> 
-                  <textarea name="message" id="message" cols="30" rows="7" class="form-control"></textarea>
+                  <textarea name="message" id="message" cols="30" rows="7" class="form-control input-content-reload" required></textarea>
                 </div>
               </div>
 
               <div class="row form-group">
                 <div class="col-md-6">
-                  <input type="submit" value="Send Message" class="btn btn-primary py-2 px-4 text-white">
+                  <input id="post-form" type="submit" class="btn btn-primary py-2 px-4 text-white">
                 </div>
                 
                 <div class="aligner" style="text-align:center;">
@@ -175,6 +175,7 @@
                 </div>
                  </div>
             </form>
+
           </div>
           <div class="col-md-5">
             
@@ -238,6 +239,8 @@
   <!-- </div> -->
 
   <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/jquery.validate.min.js"></script>
+  <script src="js/localization/custom_localization.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
   <script src="js/jquery-ui.js"></script>
   <script src="js/jquery.easing.1.3.js"></script>
@@ -257,18 +260,77 @@
   <script src="locale/nl.js"></script>
   <script>
     
+    var languageKey;
     $(document).ready(function(){
-        var languageKey = 'fr';
-        $('.modify-language').on('click',function(){
+    	initValidateForm();
+    	languageKey = 'fr';
+    	$.extend($.validator.messages, message[languageKey]);
+      	
+      	$('.modify-language').on('click',function(){
            languageKey = $(this).attr('key');
-
+           $.extend($.validator.messages, message[languageKey]);
            $('.translatable').each(function(index, element){
               $(this).html(window[languageKey][$(this).attr('key')]);
-            })
+            }) 
+
+           reloadFormMessages();
         })
-    });
+    })
+
+    function reloadFormMessages(){
+    	// Fix to directly reload every fields of the form after language change
+    	$('.input-content-reload').each(function(index, element){
+           		$(this).focus();
+           		$(this).blur();
+           })
+    }
 
 
+    function initValidateForm(){
+    	$('#form-email').validate({
+    		rules: {
+    			"company" : {
+    				"required": true,
+    				"minlength": 3,
+    				"maxlength": 50,
+    			},
+    			"last-name": {
+    				"required": true,
+    				"minlength": 3,
+    				"maxlength": 50,
+    			},
+    			"email": {
+    				"required": true,
+    				"minlength": 3,
+    				"maxlength": 50,
+    				"email":true,
+    			},
+    			"phone": {
+    				"required": true,
+    				"minlength": 5,
+    				"maxlength": 30,
+    			},
+    			"subject": {
+    				"required": true,
+    				"minlength": 5,
+    				"maxlength": 100,
+    			},
+    			"message": {
+    				"required": true,
+    				"minlength": 15,
+    				"maxlength": 500,
+    			},
+    		},
+    		submitHandler: function(form){
+    			validateForm(form);
+    		}
+    	});
+
+    }
+
+    function validateForm(form){
+    	// AJAX TO SEND FORM VALIDATION
+    }
   </script>
     
   </body>
