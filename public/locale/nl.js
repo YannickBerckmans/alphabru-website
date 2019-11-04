@@ -25,4 +25,5 @@ var nl = {
 	"form.subject":"Subject",
 	"form.message":"Bericht",
 	"form.mandatory-fields":"* Verplicht veld",
+	"form.thanks":"Thank you for filling the form. You'll be contacted soon.",
 }

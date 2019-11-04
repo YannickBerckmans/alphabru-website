@@ -98,7 +98,7 @@
     </div>
   
   
-    <div class="site-section bg-image overlay" style="background-image: url('images/background_3.jpg');" id="section-how-it-works">
+    <div class="site-section bg-image overaly" style="background-image: url('images/background_3.jpg');" id="section-how-it-works">
       <div class="container">
         <div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center border-primary">
@@ -106,10 +106,16 @@
           </div>
         </div>
         <div class="row" style="background-color:#f8f9fa; padding:30px 15px;">
-          <div class="col-md-7 mb-5">
+          <div id="form-sent" class="col-md-7 mb-5" style="display:none">
+          		<div class="p-5 bg-white">
+	          		<p class="translatable" key="form.thanks">
+	            		Merci d'avoir rempli le formulaire. Vous serez contacté bientôt.
+	            	</p>
+	            </div>
+          </div>
+          <div id="form-part" class="col-md-7 mb-5">
 
-            
-
+           
             <form id="form-email" method="post" class="p-5 bg-white">
              
               <p class="translatable text-primary" key="warning-2">
@@ -119,12 +125,12 @@
                 <div class="col-md-6 mb-3 mb-md-0">
                   <label class="text-black translatable" for="company" key="form.company">Société</label>
                   <div class="text-primary" style="display:inline-block">*</div> 
-                  <input type="text" id="company" class="form-control input-content-reload" name="company" required>
+                  <input type="text" id="company" class="form-control input-content-reload" name="company"> <!--required-->
                 </div>
                 <div class="col-md-6">
                   <label class="text-black translatable" for="last-name" key="form.last-name">Nom de famille</label>
                   <div class="text-primary" style="display:inline-block">*</div> 
-                  <input type="text" id="last-name" class="form-control input-content-reload" name="last-name" required>
+                  <input type="text" id="last-name" class="form-control input-content-reload" name="last-name" > <!--required-->
                 </div>
               </div>
 
@@ -133,7 +139,7 @@
                 <div class="col-md-12">
                   <label class="text-black translatable" for="email" key="form.email">Email</label>
                   <div class="text-primary" style="display:inline-block">*</div> 
-                  <input type="email" id="email" class="form-control input-content-reload" name="email" required>
+                  <input type="email" id="email" class="form-control input-content-reload" name="email" > <!--required-->
                 </div>
               </div>
 
@@ -142,7 +148,7 @@
                 <div class="col-md-12">
                   <label class="text-black translatable" for="phone" key="form.phone">Téléphone</label> 
                   <div class="text-primary" style="display:inline-block">*</div> 
-                  <input type="text" id="phone" class="form-control input-content-reload" name="phone" required>
+                  <input type="text" id="phone" class="form-control input-content-reload" name="phone" > <!--required-->
                 </div>
               </div>
 
@@ -151,7 +157,7 @@
                 <div class="col-md-12">
                   <label class="text-black translatable" for="subject" key="form.subject">Sujet</label>
                   <div class="text-primary" style="display:inline-block">*</div>  
-                  <input type="text" id="subject" class="form-control input-content-reload" name="subject" required>
+                  <input type="text" id="subject" class="form-control input-content-reload" name="subject" >  <!--required-->
                 </div>
               </div>
 
@@ -159,7 +165,7 @@
                 <div class="col-md-12">
                   <label class="text-black translatable" for="message" key="form.message">Message</label> 
                   <div class="text-primary" style="display:inline-block">*</div> 
-                  <textarea name="message" id="message" cols="30" rows="7" class="form-control input-content-reload" required></textarea>
+                  <textarea name="message" id="message" cols="30" rows="7" class="form-control input-content-reload" ></textarea>  <!--required-->
                 </div>
               </div>
 
@@ -280,13 +286,14 @@
     function reloadFormMessages(){
     	// Fix to directly reload every fields of the form after language change
     	$('.input-content-reload').each(function(index, element){
-           		$(this).focus();
+           		$(this).select();
            		$(this).blur();
            })
     }
 
 
     function initValidateForm(){
+
     	$('#form-email').validate({
     		rules: {
     			"company" : {
@@ -328,9 +335,37 @@
 
     }
 
-    function validateForm(form){
+    function validateForm(){
     	// AJAX TO SEND FORM VALIDATION
+		var company = $('#company').val();
+		var ln = $('#last-name').val();
+		var email = $('#email').val();
+		var phone = $('#phone').val();
+		var subject= $('#subject').val();
+		var message = $('#message').val();
+
+    	$.ajax({
+    		type: 'post',
+    		url:'form',
+    		data: {
+    			'company': company,
+    			'last-name': ln,
+    			'email': email,
+    			'phone': phone,
+    			'subject': subject,
+    			'message': message,
+    		},
+    		success: function(data){
+    			if(data['success'] != true){
+    				return;
+    			}
+
+    			$('#form-part').fadeOut();
+    			$('#form-sent').fadeIn();
+    		}
+    	})
     }
+
   </script>
     
   </body>

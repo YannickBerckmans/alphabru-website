@@ -25,5 +25,6 @@ var fr = {
 	"form.subject":"Sujet",
 	"form.message":"Message",
 	"form.mandatory-fields":"* Champs obligatoires",
+	"form.thanks":"Merci d'avoir rempli le formulaire. Vous serez contacté bientôt.",
 }
 

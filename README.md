@@ -46,3 +46,15 @@ To start the local webserver
 ```
 Run php -S localhost:8099
 ```
+
+PHPMailer
+
+```
+composer require phpmailer/phpmailer
+```
+
+phpdotenv
+
+```
+composer require vlucas/phpdotenv
+```
