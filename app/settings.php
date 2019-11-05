@@ -10,7 +10,7 @@ return function (ContainerBuilder $containerBuilder) {
     // Global Settings Object
     $containerBuilder->addDefinitions([
         'settings' => [
-            'displayErrorDetails' => true, // Should be set to false in production
+            'displayErrorDetails' => false, // Should be set to false in production
             'logger' => [
                 'name' => 'slim-app',
                 'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/app.log',
@@ -21,6 +21,7 @@ return function (ContainerBuilder $containerBuilder) {
             'smtp_password' => getenv('smtp_password'),
             'smtp_from' =>  getenv('smtp_from'),
             'smtp_to' =>  getenv('smtp_to'), 
+			'smtp_port' => getenv('smtp_port'),
         ],
     ]);
 };

@@ -39,12 +39,12 @@ return function (App $app) {
 		){
 			$body->write(json_encode(['success' => false, "message" => "missing parameter"]));	
 		} else {
-
+			//$body->write(sendMail($data, $this));
 			if(!sendMail($data, $this)){
 				$body->write(json_encode(['success' => false, "message" => "Couldn't send email"]));	
 			} else {
 				$body->write(json_encode(['success' => true, "message" => ""]));
-			}	
+			}
 		}
 		return $response->withStatus(200)->withHeader('Content-Type',"application/json;charset='utf-8");
 		
@@ -58,29 +58,29 @@ return function (App $app) {
 function sendMail($data, $self){
 	$mail = new PHPMailer();
 	try{
-		$mail->isSMTP();                                            
+		$mail->isSMTP();    
+		$mail->SMTPDebug = 2;  		
 	    $mail->Host       = $self->get('settings')['smtp_host'];                   
-	    $mail->SMTPAuth   = true;                                   
+	    $mail->SMTPAuth   = false;                                   
 	    $mail->Username   = $self->get('settings')['smtp_username'];                     
-	    $mail->Password   = $self->get('settings')['smtp_password'];                               
-	    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;     
-	    $mail->Port       = 587;           
+	    $mail->Password   = $self->get('settings')['smtp_password'];                                  
+	    $mail->Port       = $self->get('settings')['smtp_port'];           
 		$mail->setFrom($self->get('settings')['smtp_from'], '');
 		$mail->addAddress($self->get('settings')['smtp_to'],'');
 	    $mail->isHTML(true);   
-		$mail->Subject = $data['subject'];
+		$mail->Subject = "Website Alphrabru.be - ".$data['subject'];
 		$mail->Body    = $data['message'] . 
 			"<br/><br/> From: ".$data['email'].
 			"<br/>Name: ".$data['last-name'].
 			"<br/>Company:" .$data['company'].
 			"<br/>Phone: ".$data['phone'];
 
-		$mail->send();	
-
+		if(!$mail->send()) {
+			return false;
+		} 
+		
 		return true;
 	} catch(Exception $e){
 		return false;
 	}
-	
-
 }
