@@ -97,8 +97,8 @@
       </div>
     </div>
   
-  
-    <div class="site-section bg-image overaly" style="background-image: url('images/background_3.jpg');" id="section-how-it-works">
+	<a name="anchor-contact-us" href="#contact-us"></a>
+    <div class="site-section bg-image overlay" style="background-image: url('images/background_3.jpg');" id="section-how-it-works">
       <div class="container">
         <div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center border-primary">
@@ -360,11 +360,17 @@
     				return;
     			}
 
+				scrollToAnchor('anchor-contact-us');
     			$('#form-part').fadeOut();
     			$('#form-sent').fadeIn();
     		}
     	})
     }
+	
+	function scrollToAnchor(aid){
+		var aTag = $("a[name='"+ aid +"']");
+		$('html,body').animate({scrollTop: aTag.offset().top},'slow');
+	}
 
   </script>
     
