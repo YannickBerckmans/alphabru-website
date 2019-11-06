@@ -25,5 +25,6 @@ var nl = {
 	"form.subject":"Subject",
 	"form.message":"Bericht",
 	"form.mandatory-fields":"* Verplicht veld",
-	"form.thanks":"Thank you for filling the form. You'll be contacted soon.",
+	"form.thanks":"We hebben uw verzoek goed ontvangen en we nemen zo snel mogelijk contact met U op.",
+	"form.error-retry":"An error occurs. Please retry later or contact us directly by phone.",
 }

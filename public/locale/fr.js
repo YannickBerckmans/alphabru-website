@@ -25,6 +25,7 @@ var fr = {
 	"form.subject":"Sujet",
 	"form.message":"Message",
 	"form.mandatory-fields":"* Champs obligatoires",
-	"form.thanks":"Merci d'avoir rempli le formulaire. Vous serez contacté bientôt.",
+	"form.thanks":"Nous avons bien reu votre demande et nous vous contacterons dans les meilleurs délais.",
+	"form.error-retry":"Une erreur s'est produite lors de l'envoi du formulaire. Veuillez réessayer plus tard, ou nous contacter par téléphone.",
 }
 

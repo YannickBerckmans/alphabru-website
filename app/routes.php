@@ -30,6 +30,7 @@ return function (App $app) {
 		$body = $response->getBody();
 		$body->rewind();
 		$data = $request->getParsedBody();
+		
 		if(empty($data['company']) 
 			|| empty($data['last-name'])
 			|| empty($data['email'])
