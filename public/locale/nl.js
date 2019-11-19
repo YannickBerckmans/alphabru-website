@@ -26,5 +26,5 @@ var nl = {
 	"form.message":"Bericht",
 	"form.mandatory-fields":"* Verplicht veld",
 	"form.thanks":"We hebben uw verzoek goed ontvangen en we nemen zo snel mogelijk contact met U op.",
-	"form.error-retry":"An error occurs. Please retry later or contact us directly by phone.",
+	"form.error-retry": "Er is een fout opgetreden. Probeer het later opnieuw of neem rechtstreeks telefonisch contact met ons op.",
 }
