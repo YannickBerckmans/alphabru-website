@@ -14,7 +14,7 @@ use PHPMailer\PHPMailer\Exception;
 return function (App $app) {
     
 	$app->get('/', function (Request $request, Response $response) {
-		$file = 'index.html';
+		$file = 'homepage.html';
 		if (file_exists($file)) {
 			$response->getBody()->write(file_get_contents($file));
 			return $response;
