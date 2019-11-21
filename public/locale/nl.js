@@ -22,9 +22,10 @@ var nl = {
 	"form.last-name":"Achternaam",
 	"form.email":"Email",
 	"form.phone":"Telefoon",
-	"form.subject":"Subject",
+	"form.subject":"Onderwerp",
 	"form.message":"Bericht",
 	"form.mandatory-fields":"* Verplicht veld",
+	"form.validate":"Versturen",
 	"form.thanks":"We hebben uw verzoek goed ontvangen en we nemen zo snel mogelijk contact met U op.",
 	"form.error-retry": "Er is een fout opgetreden. Probeer het later opnieuw of neem rechtstreeks telefonisch contact met ons op.",
 }
